@@ -41,7 +41,7 @@
 
     <div class="container">
         <h1>Search</h1>
-        <p>Search for a petition by title:</p>
+        <p>Search for a petition:</p>
         <form th:action="@{/search}" th:object="${search}" method="post">
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Search" th:field="*{search}" required>
@@ -56,16 +56,16 @@
 
     <div class="container mt-5">
         <h2 class="mb-4">Search Results</h2>
-        <div class="row">
-            <div th:each="entry : ${searchMap}" class="col-md-12 mb-4">
+        <div th:each="entry : ${searchMap}" class="row">
+            <div class="col-12 mb-4">
                 <div class="card border rounded" >
                     <div class="card-body">
-                        <a th:href="@{'/sign/' + ${entry.key}}"><h5 class="card-title custom-card-title" th:text="${entry.value.title}"></h5></a>
+                        <a th:href="@{'/sign/' + ${entry.key}}"><h2 class="card-title custom-card-title" th:text="${entry.value.title}"></h2></a>
                         <p class="card-text" th:text="${entry.value.description}"></p>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted">Author: <span th:text="${entry.value.author}"></span></small><br>
-                        <span class="float-right">Signatures: <span th:text="${entry.value.signatureCount}"></span></span>
+                        <small class="text-muted"><span th:text="'Author: ' + ${entry.value.author}"></span></small>
+                        <small class="text-muted"><span class="float-right"><span th:text="'Signatures: ' + ${entry.value.signatureCount}"></span></span></small>
                     </div>
                 </div>
             </div>

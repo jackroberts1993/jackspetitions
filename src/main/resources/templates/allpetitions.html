@@ -42,15 +42,15 @@
 <div class="container mt-5">
     <h1 class="mb-4">List of Petitions</h1>
     <div class="row">
-        <div th:each="entry : ${petitionMap}" class="col-md-12 mb-4">
+        <div th:each="entry : ${petitionMap}" class="col-12 mb-4">
             <div class="card border rounded" >
                 <div class="card-body">
                     <a th:href="@{'/sign/' + ${entry.key}}"><h5 class="card-title custom-card-title" th:text="${entry.value.title}"></h5></a>
                     <p class="card-text" th:text="${entry.value.description}"></p>
                 </div>
                 <div class="card-footer">
-                    <small class="text-muted">Author: <span th:text="${entry.value.author}"></span></small><br>
-                    <span class="float-right">Signatures: <span th:text="${entry.value.signatureCount}"></span></span>
+                    <small class="text-muted"><span th:text="'Author: ' + ${entry.value.author}"></span></small>
+                    <small class="text-muted"><span class="float-right"><span th:text="'Signatures: ' + ${entry.value.signatureCount}"></span></span></small>
                 </div>
             </div>
         </div>
