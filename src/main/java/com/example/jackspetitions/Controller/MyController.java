@@ -15,8 +15,8 @@ import java.util.Map;
 @Controller
 public class MyController {
 
-    private HashMap<Integer,Petition> petitionMap = new HashMap<>();
 
+    private HashMap<Integer,Petition> petitionMap = new HashMap<>();
     private HashMap<Integer,Petition> searchMap = new HashMap<>();
     private Search search = new Search();
 
