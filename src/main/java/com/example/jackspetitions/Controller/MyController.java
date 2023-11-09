@@ -33,5 +33,12 @@ public class MyController {
         return "create";
     }
 
+    @GetMapping("/allpetitions")
+    public String results(Model model) {
+        // You can add any necessary model attributes here if needed
+        model.addAttribute("petitionMap", petitionMap);
+        return "allpetitions";
+    }
+
 }
 
