@@ -5,6 +5,7 @@ import com.example.jackspetitions.Model.Search;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.HashMap;
@@ -58,6 +59,21 @@ public class MyController {
             }
         }
         return "redirect:/search";
+    }
+
+    @GetMapping("/sign/{id}")
+    public String sign(Model model, @PathVariable("id") Integer id) {
+        model.addAttribute("petition", petitionMap.get(id));
+        model.addAttribute("petitionId", id);
+        // You can add any necessary model attributes here if needed
+        return "sign";
+    }
+
+    @GetMapping("/signup/{id}")
+    public String addSignature(Model model, @PathVariable("id") Integer id) {
+        // You can add any necessary model attributes here if needed
+        petitionMap.get(id).setSignatureCount(petitionMap.get(id).getSignatureCount() + 1);
+        return "redirect:/";
     }
 
 }
