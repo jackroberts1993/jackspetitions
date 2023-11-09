@@ -30,10 +30,7 @@ pipeline{
         }
 
         stage('Deploy'){
-            when{
-                // Manual approval required to proceed with deployment
-                expression { params.DEPLOY_APPROVAL == true}
-            }
+
             steps{
                 sh 'docker build -f Dockerfile -t myapp . '
                 sh 'docker rm -f "myappcontainer" || true'
