@@ -26,12 +26,6 @@ pipeline{
             }
         }
 
-        stage('Execute'){
-            steps{
-                sh "mvn exec:java"
-            }
-        }
-
         stage ('Deploy')
                 {
                     steps {
