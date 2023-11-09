@@ -23,22 +23,21 @@ pipeline{
                 //Package files with Maven
                 sh "mvn package"
                 archiveArtifacts artifacts: 'target/*.war', allowEmptyArchive: true
-
             }
         }
 
-        stage ('Deploy')
-                when {
-                        // Manual approval required to proceed with deployment
-                        input 'Approve Deployment?'
-                    }
-                {
-                    steps {
-                        sh 'docker build -f Dockerfile -t myapp . '
-                        sh 'docker rm -f "myappcontainer" || true'
-                        sh 'docker run --name "myappcontainer" -p 9090:8081 --detach myapp:latest'
-                    }
+        stage('Deploy')
+            when{
+                // Manual approval required to proceed with deployment
+                input 'Approve Deployment?'
                 }
+            {
+                steps{
+                    sh 'docker build -f Dockerfile -t myapp . '
+                    sh 'docker rm -f "myappcontainer" || true'
+                    sh 'docker run --name "myappcontainer" -p 9090:8081 --detach myapp:latest'
+                }
+            }
     }
     //Check if package successful
     post{
