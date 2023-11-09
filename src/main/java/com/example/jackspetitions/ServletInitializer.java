@@ -1,6 +1,6 @@
-package com.example.jackspetitions.Controller;
+package com.example.jackspetitions;
 
-import com.example.jackspetitions.Controller.JackspetitionsApplication;
+import com.example.jackspetitions.JackspetitionsApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 

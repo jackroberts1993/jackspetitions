@@ -1,4 +1,4 @@
-package com.example.jackspetitions.Controller;
+package com.example.jackspetitions;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
