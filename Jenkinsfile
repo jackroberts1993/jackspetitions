@@ -11,7 +11,7 @@ pipeline{
         stage('Build'){
             steps{
                 //Run Maven on an agent on Linux Machine with Maven installed
-                sh "mvn clean:clean"
+                sh "mvn clean"
                 sh "mvn dependency:copy-dependencies"
                 sh "mvn compiler:compile"
 
