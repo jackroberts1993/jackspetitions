@@ -39,17 +39,17 @@
             <h1>Create a Petition</h1>
             <form  th:action="@{/create}" th:object="${petition}" method="post">
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-12">
                         <label for="inputTitle4">Title</label>
                         <input type="text" class="form-control" id="inputTitle4" placeholder="Title" th:field="*{title}" required>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-12">
                         <label for="inputDescription4">Petition Description</label>
                         <textarea  class="form-control" id="inputDescription4" placeholder="Description..." th:field="*{description}" required></textarea>
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-12">
                         <label for="inputAuthor">Author</label>
                         <input type="text" class="form-control" id="inputAuthor" placeholder="Enter your name..." th:field="*{author}" required>
                     </div>
