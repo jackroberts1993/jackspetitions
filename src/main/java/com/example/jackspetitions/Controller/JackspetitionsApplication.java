@@ -1,7 +1,8 @@
-package com.example.jackspetitions;
+package com.example.jackspetitions.Controller;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 
 @SpringBootApplication
 public class JackspetitionsApplication {
