@@ -1,5 +1,8 @@
 pipeline{
     agent any
+    parameters{
+        booleanParam(name: 'CONSENT', description: 'Approve Deployment?')
+        }
 
     stages{
         stage('GetProject'){
@@ -29,7 +32,7 @@ pipeline{
         stage('Deploy'){
             when{
                 // Manual approval required to proceed with deployment
-                input 'Approve Deployment?'
+                expression{params.CONSENT == 'True'}
             }
             steps{
                 sh 'docker build -f Dockerfile -t myapp . '
