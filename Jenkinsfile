@@ -22,11 +22,16 @@ pipeline{
             steps{
                 //Package files with Maven
                 sh "mvn package"
+                archiveArtifacts artifacts: 'target/*.war', allowEmptyArchive: true
 
             }
         }
 
         stage ('Deploy')
+                when {
+                        // Manual approval required to proceed with deployment
+                        input 'Approve Deployment?'
+                    }
                 {
                     steps {
                         sh 'docker build -f Dockerfile -t myapp . '
