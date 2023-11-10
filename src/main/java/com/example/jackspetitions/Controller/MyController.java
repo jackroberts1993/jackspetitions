@@ -45,7 +45,7 @@ public class MyController {
 
     // Add the petitionMap to the model
     @GetMapping("/allpetitions")
-    public String results(Model model) {
+    public String petitions(Model model) {
         // You can add any necessary model attributes here if needed
         model.addAttribute("petitionMap", petitionMap);
         return "allpetitions";
@@ -54,10 +54,16 @@ public class MyController {
     // Add the searchMap and search to the model
     @GetMapping("/search")
     public String searchbar(Model model) {
-        model.addAttribute("searchMap", searchMap);
         model.addAttribute("search", search);
         // You can add any necessary model attributes here if needed
         return "search";
+    }
+
+    @GetMapping("/results")
+    public String results(Model model) {
+        model.addAttribute("searchMap", searchMap);
+        // You can add any necessary model attributes here if needed
+        return "results";
     }
 
     //Clear the searchMap and add the matching petitions to the searchMap, redirect to /search
@@ -72,7 +78,7 @@ public class MyController {
                 searchMap.put(entry.getKey(), entry.getValue());
             }
         }
-        return "redirect:/search";
+        return "redirect:/results";
     }
     //Using the PathVariable annotation, get the petition with the given id and add it to the model along with the id itself
     @GetMapping("/sign/{id}")
