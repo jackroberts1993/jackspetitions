@@ -1,8 +1,5 @@
 pipeline{
     agent any
-    parameters{
-        booleanParam(name: 'DEPLOY_APPROVAL', defaultValue: true, description: 'Approve Deployment?')
-        }
 
     stages{
         stage('GetProject'){
@@ -17,7 +14,6 @@ pipeline{
                 sh "mvn clean"
                 sh "mvn dependency:copy-dependencies"
                 sh "mvn compiler:compile"
-
             }
         }
 
@@ -30,11 +26,12 @@ pipeline{
         }
 
         stage('Deploy'){
-            when{
-            // Manual approval required to proceed with deployment
-            expression { params.DEPLOY_APPROVAL}
-            }
+
             steps{
+                timeout(time: 10, unit: 'MINUTES') {
+                    input message: 'Deploy to Production?', ok: 'Yes'
+                }
+                echo 'Initiating Deployment'
                 sh 'docker build -f Dockerfile -t myapp . '
                 sh 'docker rm -f "myappcontainer" || true'
                 sh 'docker run --name "myappcontainer" -p 9090:8080 --detach myapp:latest'

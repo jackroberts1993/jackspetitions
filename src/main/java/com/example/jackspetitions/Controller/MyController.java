@@ -28,10 +28,10 @@ public class MyController {
         return "index";
     }
 
-    //Add a new Petition to the model
+    //Create Petition page
     @GetMapping("/create")
     public String create(Model model) {
-        // You can add any necessary model attributes here if needed
+        //Add a new Petition to the model
         model.addAttribute("petition", new Petition());
         return "create";
     }
@@ -39,14 +39,14 @@ public class MyController {
     // Add the petition to the petitionMap
     @PostMapping("/create")
     public String createPetition(Petition petition) {
+        // Add the petition to the petitionMap with a unique id based on the current size of the map
         petitionMap.put(petitionMap.size() + 1, petition);
         return "create";
     }
 
-    // Add the petitionMap to the model
+    // All Petitions page
     @GetMapping("/allpetitions")
     public String petitions(Model model) {
-        // You can add any necessary model attributes here if needed
         model.addAttribute("petitionMap", petitionMap);
         return "allpetitions";
     }
@@ -55,44 +55,45 @@ public class MyController {
     @GetMapping("/search")
     public String searchbar(Model model) {
         model.addAttribute("search", search);
-        // You can add any necessary model attributes here if needed
         return "search";
     }
 
     @GetMapping("/results")
     public String results(Model model) {
         model.addAttribute("searchMap", searchMap);
-        // You can add any necessary model attributes here if needed
         return "results";
     }
 
     //Clear the searchMap and add the matching petitions to the searchMap, redirect to /search
     @PostMapping("/search")
     public String searchPetitions(Search search) {
-        // Search through the petitionList for any petitions that contain the search string
-
+        //Clear the searchMap prior to adding any petitions
         searchMap.clear();
-        // Add the matching petitions to the searchMap
+        // Search through the petitionList for any petitions that contain the search string
         for (Map.Entry<Integer, Petition> entry: petitionMap.entrySet()) {
-            if (entry.getValue().getTitle().contains(search.getSearch()) || entry.getValue().getDescription().contains(search.getSearch()) || entry.getValue().getAuthor().contains(search.getSearch())) {
+            if (entry.getValue().getTitle().contains(search.getSearch()) ||
+                entry.getValue().getDescription().contains(search.getSearch()) ||
+                entry.getValue().getAuthor().contains(search.getSearch())) {
+                // Add the matching petitions to the searchMap
                 searchMap.put(entry.getKey(), entry.getValue());
             }
         }
+        //Redirect to the results page
         return "redirect:/results";
     }
-    //Using the PathVariable annotation, get the petition with the given id and add it to the model along with the id itself
+
+
     @GetMapping("/sign/{id}")
     public String sign(Model model, @PathVariable("id") Integer id) {
+        //Using the PathVariable annotation, get the petition with the given id and add it to the model along with the id
         model.addAttribute("petition", petitionMap.get(id));
         model.addAttribute("petitionId", id);
-        // You can add any necessary model attributes here if needed
         return "sign";
     }
 
-    // Add the signatureCount to the petition with the given id
     @GetMapping("/signup/{id}")
     public String addSignature(Model model, @PathVariable("id") Integer id) {
-        //Increment the signature count
+        // Increment the signatureCount to the petition with the given id
         petitionMap.get(id).setSignatureCount(petitionMap.get(id).getSignatureCount() + 1);
         return "redirect:/";
     }
