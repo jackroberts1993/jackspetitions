@@ -18,6 +18,7 @@ public class MyController {
 
     //Data structures to hold the petitions and search results
     private HashMap<Integer,Petition> petitionMap = new HashMap<>();
+
     private HashMap<Integer,Petition> searchMap = new HashMap<>();
     private Search search = new Search();
 
@@ -25,6 +26,18 @@ public class MyController {
     @GetMapping("/")
     public String index(Model model) {
         // You can add any necessary model attributes here if needed
+        if(petitionMap.isEmpty()){
+            Petition p1 = new Petition();
+            Petition p2 = new Petition();
+            p1.setTitle("Petition to get rid of the 5th floor of the library");
+            p1.setAuthor("Jack");
+            p1.setDescription("The 5th floor of the library is too loud and I can't focus on my work. Please sign this petition to get rid of it.");
+            p2.setTitle("Petition to get rid of the 4th floor of the library");
+            p2.setAuthor("Tom");
+            p2.setDescription("The 4th floor of the library is too quiet and I can't focus on my work. Please sign this petition to get rid of it.");
+            petitionMap.put(1, p1);
+            petitionMap.put(2, p2);
+        }
         return "index";
     }
 
