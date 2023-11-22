@@ -47,6 +47,7 @@ public class MyController {
         //Add a new Petition to the model
         model.addAttribute("petition", new Petition());
         return "create";
+        // return "redirect:/allpetitions";
     }
 
     // Add the petition to the petitionMap
